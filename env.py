@@ -183,15 +183,20 @@ class Env():
                 -self.w2*self.calc_total_latency()
        
     def calc_total_power(self):
+        # accumulate total_power so we have a sum of all instead of first step
+        total_power = 0
         for m in self.machines:
-            return self.P_0 + (self.P_100 - self.P_0) * (2 * m.cpu() - m.cpu()**(1.4))
-        
+            total_power += self.P_0 + (self.P_100 - self.P_0) * (2 * m.cpu() - m.cpu()**(1.4))
+        return total_power
+
     def calc_total_latency(self):
+        wait = []
         for t in self.tasks:
-            latency = [t.start_time - t.arrive_time]
-        for i in range(1, len(latency)):
-            latency[i] = latency[i] + latency[i - 1]
-        return np.sum(latency)
+            wait.append(t.start_time - t.arrive_time)
+
+        for i in range(1, len(wait)):
+            wait[i] = wait[i] + wait[i - 1]
+        return np.sum(np.sum(wait))
     
     
 class Task(object):
