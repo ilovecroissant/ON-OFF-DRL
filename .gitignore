@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+adaptive_runs/        # future training run outputs
+*.pth                 # model weights (large binaries)
+.env                  # API keys
