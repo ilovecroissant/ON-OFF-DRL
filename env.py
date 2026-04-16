@@ -186,7 +186,8 @@ class Env():
         # accumulate total_power so we have a sum of all instead of first step
         total_power = 0
         for m in self.machines:
-            total_power += self.P_0 + (self.P_100 - self.P_0) * (2 * m.cpu() - m.cpu()**(1.4))
+            cpu = max(0.0, min(1.0, m.cpu()))
+            total_power += self.P_0 + (self.P_100 - self.P_0) * (2 * cpu - cpu**1.4)
         return total_power
 
     def calc_total_latency(self):
@@ -342,7 +343,7 @@ class Machine():
         if self.state == 'sleeping':
             return 0
         else:
-            cpu = self.cpu()
+            cpu = max(0.0, min(1.0, self.cpu()))
             return (self.P_0 + (self.P_100 - self.P_0) * (2*cpu - cpu**1.4)) * (cur_time - self.cur_time)
 
     def try_to_wake_up(self, task):

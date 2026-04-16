@@ -325,7 +325,7 @@ def adaptive_loop(
 
         # Step 4: Train
         log_path = os.path.join(log_dir, f"phase_{phase:03d}.csv")
-        print(f"  Training for {phase_timesteps} timesteps → {log_path}")
+        print(f"  Training for {phase_timesteps} timesteps -> {log_path}")
         run_phase(agent, env, phase_timesteps, max_ep_len,
                   update_timestep, log_freq, log_path)
 
@@ -338,7 +338,7 @@ def adaptive_loop(
         # Step 6: Save checkpoint
         ckpt = os.path.join(model_dir, f"PPO{hidden_size}_phase_{phase:03d}.pth")
         agent.save(ckpt)
-        print(f"  Checkpoint saved → {ckpt}")
+        print(f"  Checkpoint saved -> {ckpt}")
 
     # Final model
     final_path = os.path.join(model_dir,

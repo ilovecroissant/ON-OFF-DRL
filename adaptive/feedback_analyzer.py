@@ -27,7 +27,7 @@ class PhaseFeedback:
     def summary(self) -> str:
         return (
             f"Phase {self.phase} [{self.algorithm}] | strategy={self.strategy_used} | "
-            f"trend={self.trend} | reward {self.initial_reward:.4f} → {self.final_reward:.4f} "
+            f"trend={self.trend} | reward {self.initial_reward:.4f} -> {self.final_reward:.4f} "
             f"({self.improvement_pct:+.1f}%) | std={self.reward_std:.4f}"
         )
 
